@@ -1,0 +1,7 @@
+---
+- pip: 
+    requirements: "/tmp/{{ app_name }}/requirements.txt"
+    virtualenv: "/home/vagrant/{{ app_name }}"
+  become: yes
+  become_user: vagrant
+  

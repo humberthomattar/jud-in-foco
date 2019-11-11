@@ -1,0 +1,10 @@
+---
+  - name: Configure an python flask enviroment, for development
+    hosts: all
+    connection: local
+    vars_files:
+      - vars/main.yml
+
+    roles:
+    - default
+    - application

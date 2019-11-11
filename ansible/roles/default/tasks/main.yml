@@ -1,0 +1,26 @@
+---
+  - name: set timezone to America/Sao_Paulo
+    become: yes
+    become_user: root
+    timezone:
+      name: America/Sao_Paulo
+  
+  - name: Default | Install default packages
+    become: yes
+    become_user: root
+    apt:
+      name: 
+        - git
+        - software-properties-common
+        - build-essential
+        - unzip 
+        - curl
+        - htop
+        - wget
+        - python3-pip
+      update_cache: true
+      state: present
+    tags:
+      - packages
+
+  - include: pip.yml
