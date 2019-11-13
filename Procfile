@@ -1,1 +1,1 @@
-web: web: python judinfoco/manage.py runserver "0.0.0.0:$PORT" 
+web: python judinfoco/manage.py runserver "0.0.0.0:$PORT" 
