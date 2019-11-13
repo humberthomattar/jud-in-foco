@@ -1,0 +1,36 @@
+
+3 Perfis:
+    - Leitura
+    - Leitura e cadastro da Guia de Execução
+    - Administrador 
+
+Guia de Execução
+
+Cadastro
+ - Nome do Adolescente
+ - PEMSE (Número do processo na justiça)
+ - Tipo da medida:
+    - LA - Liberdade Assistida
+    - PSC - Prestação de Serviços a Comunidade
+    - LA + PSC
+- Data de recimento na unidade (Inicio dos prazos)
+
+
+Distribuição
+- Responsável (distribuição para os especilistas)
+- Data de distribuição
+- Enviar email após a distribuição (especilistas e Gerencia)
+
+
+Controlar os prazos judiciais:
+
+PIA - Plano individual de Atendimento (15 dias)
+Relatório Avaliativo da LA (06 meses)
+Relatório Avaliativo da PSC (Variável)
+Relatório Informativo
+
+
+
+Cadastro de Usuários centralizado, após o cadastro enviar o email para o reset da senha.
+
+

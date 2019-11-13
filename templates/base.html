@@ -13,89 +13,114 @@
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet"> 
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
 </head>
+
 <body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-          <div class="sidebar-heading">
-              <center>
-                <img src="{% static 'img/jud-in-foco.png' %}" alt="Jud in foco">  
-                <font color="#075280"><p><strong> Jud <i>in</i> Foco </strong></p></font>
-          </center>
-          </div>
-          <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 1</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 2</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 3</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 4</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 5</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Administração</a>
-          </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-    
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-    
-          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button class="btn btn-primary" id="menu-toggle"> Recolher </button>
-    
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                  <a class="nav-link active" href="#">
-                      {% if user.is_authenticated %}
-                      Olá {{ user.username }}!
-                      {% else %}
-                      <meta http-equiv="REFRESH" content="0;url={%url 'login' %}">
-                      <p>Você não está autenticada.</p>
-                      {% endif %}
-                  </a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Menu
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">menu 1</a>
-                    <a class="dropdown-item" href="#">menu 2</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
-                  </div>
-                </li>
-              </ul>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">
+        <center>
+          <a href="{%url 'home' %}">
+            <img src="{% static 'img/jud-in-foco.png' %}" alt="Jud in foco">
+            <font color="#075280">
+              <p><strong> Jud <i>in</i> Foco </strong></p>
+            </font>
+        </a>
+        </center>
+      </div>
+      <div class="list-group list-group-flush">
+          <a href="{%url 'home' %}" class="list-group-item list-group-item-action bg-light">Home</a> 
+        
+          <a class="btn collapsed list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#collapseGE" role="button" aria-expanded="true" aria-controls="collapseGE">
+              Guia de Execução
+            </a>  
+            <div class="collapse" id="collapseGE">
+                <a href="#" class="list-group-item list-group-item-action bg-light">> Pesquisar</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-light">> Nova</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-light">> Distribuir</a>
             </div>
-          </nav>
-  
-  <div class="container-fluid">
-      <main>
+
+          <a class="btn collapsed list-group-item list-group-item-action bg-light" 
+            data-toggle="collapse" href="#collapseAdministracao" role="button" 
+            aria-expanded="true" aria-controls="collapseAdministracao">
+              Administração
+            </a>  
+            <div class="collapse" id="collapseAdministracao">
+                  <a href="{%url 'users' %}" class="list-group-item list-group-item-action bg-light">> Usuários</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-light">> Configurações</a>
+            </div>
+ 
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">
+          Recolher
+        </button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <a class="nav-link" href="#">
+              {% if user.is_authenticated %}
+              Olá {{ user.username }}!
+              {% else %}
+              <meta http-equiv="REFRESH" content="0;url={%url 'login' %}">
+              <p>Você não está autenticada.</p>
+              {% endif %}
+            </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true">
+                Ações
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item disabled" href="#">menu</a>
+                <a class="dropdown-item disabled" href="#">menu</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <main>
           {% block content %}
 
 
           {% endblock %}
-    </main>
-  </div>
-  
-  </div>
-  <!-- /#page-content-wrapper -->
-</div>
-<!-- /#wrapper -->
+        </main>
+      </div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
 
-<!-- Menu Toggle Script -->
-<script>
-  $("#menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-  });
-</script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
 </body>
+
 </html>
