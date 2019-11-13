@@ -1,1 +1,1 @@
-web: gunicorn jud_in_foco.wsgi
+web: web: python judinfoco/manage.py runserver "0.0.0.0:$PORT" 
