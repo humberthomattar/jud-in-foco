@@ -1,19 +1,101 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   {% load static %}
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <title>{% block title %}Jud in Foco{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="app jud in foco">
+  <meta name="author" content="humbertho.mattar">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet"> 
 </head>
 <body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+          <div class="sidebar-heading">
+              <center>
+                <img src="{% static 'img/jud-in-foco.png' %}" alt="Jud in foco">  
+                <font color="#075280"><p><strong> Jud <i>in</i> Foco </strong></p></font>
+          </center>
+          </div>
+          <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 1</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 2</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 3</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 4</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Menu 5</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Administração</a>
+          </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+    
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+    
+          <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle"> Recolher </button>
+    
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <a class="nav-link active" href="#">
+                      {% if user.is_authenticated %}
+                      Olá {{ user.username }}!
+                      {% else %}
+                      <meta http-equiv="REFRESH" content="0;url={%url 'login' %}">
+                      <p>Você não está autenticada.</p>
+                      {% endif %}
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">menu 1</a>
+                    <a class="dropdown-item" href="#">menu 2</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+  
+  <div class="container-fluid">
+      <main>
+          {% block content %}
+
+
+          {% endblock %}
+    </main>
+  </div>
+  
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+</script>
 </body>
 </html>
