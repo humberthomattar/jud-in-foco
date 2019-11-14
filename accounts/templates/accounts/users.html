@@ -6,7 +6,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Usuários</h1>
             
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Novo Usuário</a>
+            <a href="{% url 'user_new' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Novo Usuário</a>
         </div>
         <p class="mb-4">Ambiente de gestão dos usuários da plataforma Jud <i>in</i> Foco.</p>
         
@@ -26,7 +26,8 @@
                         <th>Último Nome</th>
                         <th>E-mail</th>
                         <th>Ativo?</th>
-                        <th>Último Acesso</th>    
+                        <th>Último Acesso</th>
+                        <th>Ações</th>   
                     </tr>
                   </thead>
                   <tbody>
@@ -38,6 +39,20 @@
                       <td>{{ user.email }}</td>
                       <td>{{ user.is_active }}</td>
                       <td>{{ user.last_login}}</td>
+                      <td> 
+                        <center>
+                          <div class="dropdown no-arrow btn-sm btn-info btn-circle">
+                              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bars text-gray-100"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-156px, 19px, 0px);">
+                                <div class="dropdown-header">Ações:</div>
+                                <a class="dropdown-item" href="#">Editar</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#InativarModal">Inativar</a>
+                              </div>
+                            </div>
+                          </center>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -47,5 +62,24 @@
           </div>
         </div>
 
+
+  <!-- Inativar Modal-->
+  <div class="modal fade" id="InativarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Você tem certeza disso?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Ao confirmar você estará alterando a situação do usuário (inativando ou ativando-o).</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-primary" href="#">Confirmar</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
 {% endblock %}

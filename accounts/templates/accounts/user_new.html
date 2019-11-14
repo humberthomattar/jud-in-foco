@@ -1,0 +1,97 @@
+<!-- templates/users.html-->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Novo Usuário</h1>
+
+</div>
+<p class="mb-4">Ambiente de gestão dos usuários da plataforma Jud <i>in</i> Foco.</p>
+<!-- end Page Heading -->
+
+
+
+  <!-- Messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div {% if message.tags %} class="alert alert-{{ message.tags }}" role="alert" {% endif %}>
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <!-- end messages -->
+
+  <div class="card mb-4">
+    <div class="card-header">
+      Formulário de cadastro
+    </div>
+    <div class="card-body">
+      <!-- Inicio do formulário -->
+
+      <form class="user" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <input type="text" class="form-control form-control-user" name="username" required id="id_username"
+            placeholder="Username ou Login">
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" class="form-control form-control-user" id="id_first_name" required name="first_name"
+              placeholder="Primeiro nome">
+          </div>
+
+          <div class="col-sm-6">
+            <input type="text" class="form-control form-control-user" id="id_last_name" required name="last_name"
+              placeholder="Último nome">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control form-control-user" name="email" id="id_email"
+            placeholder="Endereço de email">
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="password" class="form-control form-control-user" id="id_password" required name="password"
+              placeholder="Senha">
+          </div>
+
+          <div class="col-sm-6">
+            <input type="password" class="form-control form-control-user" id="repeat_password" required
+              name="repeat_password" placeholder="Confirme a senha">
+          </div>
+        </div>
+        <hr>
+        <!-- buttons -->
+        <div class="form-group row">
+          <div class="col-sm">
+            <a href="{% url 'users' %}" class="btn btn-secondary btn-user btn-block">
+              Voltar
+            </a>
+          </div>
+          <div class="col-sm">
+            <button type="reset" class="btn btn-danger btn-user btn-block">
+              Limpar
+            </button>
+          </div>
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary btn-user btn-block">
+              Cadastrar usuário
+            </button>
+          </div>
+        </div>
+        <!-- End buttons -->
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
