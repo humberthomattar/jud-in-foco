@@ -20,8 +20,8 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('accounts.urls')),
+    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
     path('', include('django.contrib.auth.urls'), name='login'),
     path('', RedirectView.as_view(pattern_name='login', permanent=False),),
-    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('users/', TemplateView.as_view(template_name='users.html'), name='users'),
 ]
