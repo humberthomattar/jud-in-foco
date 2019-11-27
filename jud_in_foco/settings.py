@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url
+import dj_database_url # import fo heroku
 import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -32,7 +32,6 @@ SECRET_KEY = '(f+mus61q&c@bcbsw$y#2yfh0gj#40s2#l&v8)l=5^q91)(kqu'
 DEBUG = True
 
 ALLOWED_HOSTS = ['judinfoco.herokuapp.com','127.0.0.1','localhost']
-
 
 # Application definition
 
@@ -89,6 +88,7 @@ WSGI_APPLICATION = 'jud_in_foco.wsgi.application'
 #    }
 #}
 
+# Config for heroku
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
@@ -133,8 +133,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
