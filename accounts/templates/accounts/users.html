@@ -70,15 +70,17 @@
                     aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-156px, 19px, 0px);">
                     <div class="dropdown-header">Ações:</div>
-                    <a class="dropdown-item" href="#">Editar</a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#InativarModal"
-                      onclick="setActionInativar('{% url 'user_change_is_active' pk=user.pk %}')">
+                    <a class="dropdown-item" href="{% url 'user_edit' pk=user.pk %}">Editar</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ConfirmationModal"
+                      onclick="setActionConfirmationModal('{% url 'user_change_is_active' pk=user.pk %}', 'Ao confirmar você mudará a situação do usuário.' )">
                       {% if user.is_active == True %}
                       Inativar
                       {% else %}
                       Ativar
                       {% endif %}
                     </a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ConfirmationModal" 
+                    onclick="setActionConfirmationModal('{% url 'user_reset_password' pk=user.pk %}','Ao confirmar você reiniciará a senha do usuário.')">Reiniciar senha</a>
                   </div>
                 </div>
               </center>
@@ -94,24 +96,25 @@
 
 
 <script>
-  function setActionInativar(url) {
-    document.getElementById("formInativarModal").action = url;
+  function setActionConfirmationModal(url, msg) {
+    document.getElementById("formConfirmationModal").action = url;
+    document.getElementById("textModal").innerHTML = msg;
   }
 </script>
 
-<!-- Inativar Modal-->
-<div class="modal fade" id="InativarModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="modal fade" id="ConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form id="formInativarModal" method='post' class="form" role="form" action="#">
+      <form id="formConfirmationModal" method='post' class="form" role="form" action="#">
         {% csrf_token %}
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Você tem certeza disso?</h5>
+          <h5 class="modal-title" id="ModalLabel">Você tem certeza disso?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Ao confirmar você estará alterando a situação do usuário.</div>
+        <div class="modal-body" id="textModal"></div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <button class="btn btn-primary" type="submit">Confirmar</button>
@@ -119,6 +122,11 @@
       </form>
     </div>
   </div>
+
+
+
+
+
 
 </div>
 

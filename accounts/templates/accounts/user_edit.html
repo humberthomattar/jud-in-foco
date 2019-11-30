@@ -3,10 +3,9 @@
 
 {% block content %}
 
-
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Novo Usuário</h1>
+  <h1 class="h3 mb-0 text-gray-800">Editar Usuário</h1>
 
 </div>
 <p class="mb-4">Ambiente de gestão dos usuários da plataforma Jud <i>in</i> Foco.</p>
@@ -29,43 +28,41 @@
 
   <div class="card mb-4">
     <div class="card-header">
-      Formulário de cadastro
+      Formulário para alteração
     </div>
     <div class="card-body">
       <!-- Inicio do formulário -->
-
-      <form class="user" method="POST">
+      
+      <form class="user" method="POST" action="{% url 'user_edit' pk=user.pk %}">
         {% csrf_token %}
 
+        
         <div class="form-group">
           <input type="text" class="form-control form-control-user" name="username" required id="id_username"
-            placeholder="Username ou Login">
+            placeholder="Username ou Login" value="{{ user.username }}"> 
         </div>
+
 
         <div class="form-group row">
           <div class="col-sm-6 mb-3 mb-sm-0">
             <input type="text" class="form-control form-control-user" id="id_first_name" required name="first_name"
-              placeholder="Primeiro nome">
+              placeholder="Primeiro nome" value="{{ user.first_name }}">
           </div>
 
           <div class="col-sm-6">
             <input type="text" class="form-control form-control-user" id="id_last_name" required name="last_name"
-              placeholder="Último nome">
+              placeholder="Último nome" value="{{user.last_name}}">
           </div>
         </div>
 
         <div class="form-group">
           <input type="email" class="form-control form-control-user" name="email" id="id_email"
-            placeholder="Endereço de email">
+            placeholder="Endereço de email" value="{{ user.email }}">
         </div>
 
-        <div class="form-group row">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="hidden" class="form-control form-control-user" id="id_password" required name="password"
-              value="geama2019">
-          </div>
 
-        </div>
+        
+        
         <hr>
         <!-- buttons -->
         <div class="form-group row">
@@ -81,7 +78,7 @@
           </div>
           <div class="col-sm">
             <button type="submit" class="btn btn-primary btn-user btn-block">
-              Cadastrar usuário
+              Salvar Alterações
             </button>
           </div>
         </div>
@@ -90,7 +87,5 @@
     </div>
   </div>
 </div>
-
-
 
 {% endblock %}

@@ -1,12 +1,14 @@
-from .forms import UserForm
 import logging
+from .forms import UserForm
+from .forms import UserChangeForm
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+#from django.contrib.auth.forms import UserChangeForm
+from datetime import datetime
 
 logger = logging.getLogger('django')
 
@@ -14,6 +16,7 @@ logger = logging.getLogger('django')
 def users_list(request):
     users = User.objects.all()
     return render(request, 'accounts/users.html', {'users': users})
+
 
 def user_new(request):
     try:
@@ -30,7 +33,6 @@ def user_new(request):
         messages.warning(request, 'Falha no cadastro. Detalhe: +' + str(e))
     form = UserForm()
     return render(request, 'accounts/user_new.html', {'form': form})
-
 
 
 def change_password(request):
@@ -57,10 +59,35 @@ def user_change_is_active(request, pk):
                 user.is_active = True
             user.save()
             messages.success(request, 'Situação da conta alterada com sucesso.')
-        else:
-            messages.warning(request, 'Falha. Detalhe: +' + str(e))    
     except Exception as e:
         messages.warning(request, 'Falha. Detalhe: +' + str(e))
     users = User.objects.all()
     return render(request, 'accounts/users.html', {'users': users})
 
+
+def user_edit(request,pk):
+    try:
+        user = User.objects.get(pk=pk)
+        form = UserChangeForm(request.POST, instance=user) or None
+        if request.method == 'POST':
+            if form.is_valid():
+                user = form.save()
+                messages.success(request, 'Usuário alterado com sucesso.')
+            else:
+                messages.warning(request, 'Falha na alteração. Formulário Inválido.')
+    except Exception as e:
+            messages.warning(request, 'Falha na alteração. Detalhe: +' + str(e))
+    return render(request, 'accounts/user_edit.html', {'form': form, 'user': user})
+
+
+def user_reset_password(request, pk):
+    try:
+        if request.method == "POST":
+            user = User.objects.get(pk=pk)
+            user.password = make_password('geama2019')
+            user.save()
+            messages.success(request, 'Senha reiniciada para: geama2019')
+    except Exception as e:
+        messages.warning(request, 'Falha. Detalhe: +' + str(e))
+    users = User.objects.all()
+    return render(request, 'accounts/users.html', {'users': users})
