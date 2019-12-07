@@ -1,4 +1,5 @@
 
+
 3 Perfis:
     - Leitura
     - Leitura e cadastro da Guia de Execução
@@ -33,5 +34,37 @@ Relatório Informativo
 
 
 Cadastro de Usuários centralizado, após o cadastro enviar o email para o reset da senha.
+
+
+
+
+Manter Usuários
+    Pesquisar Usuários  (ok)
+    Cadastrar Usuários  (ok)
+    Editar Usuários     (ok)
+    Ativar Usuários     (ok)
+    Inativar Usuários   (ok)
+    Resetar senha       (ok)
+    Trocar senha        (ok)
+    Envio de email para reset de senha   (nok)
+
+Manter Adolescente
+    Pesquisar Adoslescente
+    Cadastrar Adolescente
+    Editar Adolescente
+    Inativar Adolescente
+
+    Dados do Adolescente:
+        Nome
+        Nome da Mãe
+        Nome do Pai
+        Data de Nascimento
+        Sexo
+        Endereço https://viacep.com.br/ws/70362010/json/
+        
+
+
+
+
 
 

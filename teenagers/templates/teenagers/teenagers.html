@@ -1,0 +1,142 @@
+<!-- templates/users.html-->
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Adolescentes</h1>
+
+  <a href="{% url 'teenager_new' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+      class="fas fa-plus-circle fa-sm text-white-50"></i> Novo(a) Adolescente</a>
+</div>
+<p class="mb-4">Ambiente de gestão dos adolescentes da plataforma Jud <i>in</i> Foco.</p>
+
+
+<!-- Messages -->
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{ message.tags }}" role="alert" {% endif %}>
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+<!-- end messages -->
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Lista de Adolescentes</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nome do(a) Adolescente</th>
+            <th>Nome da Mãe</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for teenager in teenagers %}
+          <tr>
+            <td>{{ teenager.name }}</td>
+            <td>{{ teenager.name_mother }}</td>
+            <td>{{ teenager.date_birth}}</td>
+            <td>{% if teenager.type_sex == '1' %}
+                    Masculino
+                {% elif teenager.type_sex == '2' %}
+                    Feminino
+                {% elif teenager.type_sex == '3' %}
+                    Outros
+                {% else %}
+                    Não informado
+                {% endif %}
+            </td>
+            <td>{% if teenager.is_active == True %}
+                    Ativo
+                {% else %}
+                    Inativo
+                {% endif %}
+            </td>
+            <td>
+              <center>
+                <div class="dropdown no-arrow btn-sm btn-info btn-circle">
+                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars text-gray-100"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
+                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-156px, 19px, 0px);">
+                    <div class="dropdown-header">Ações:</div>
+                    <a class="dropdown-item" href="{% url 'teenager_edit' pk=teenager.pk %}">Editar</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ConfirmationModal"
+                      onclick="setActionConfirmationModal('{% url 'teenager_change_status' pk=teenager.pk %}', 'Ao confirmar você mudará a situação do adolescente.' )">
+                      {% if teenager.is_active == True %}
+                      Inativar
+                      {% else %}
+                      Ativar
+                      {% endif %}
+                    </a>
+          
+                  </div>
+                </div>
+              </center>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script>
+  function setActionConfirmationModal(url, msg) {
+    document.getElementById("formConfirmationModal").action = url;
+    document.getElementById("textModal").innerHTML = msg;
+  }
+</script>
+
+
+<div class="modal fade" id="ConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form id="formConfirmationModal" method='post' class="form" role="form" action="#">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Você tem certeza disso?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" id="textModal"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" type="submit">Confirmar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}

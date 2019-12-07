@@ -1,0 +1,107 @@
+<!-- templates/users.html-->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Novo(a) Adolescente</h1>
+
+</div>
+<p class="mb-4">Ambiente de gestão dos(as) adolescentes da plataforma Jud <i>in</i> Foco.</p>
+<!-- end Page Heading -->
+
+
+
+<!-- Messages -->
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{ message.tags }}" role="alert" {% endif %}>
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+<!-- end messages -->
+
+<div class="card mb-4">
+  <div class="card-header">
+    Dados do Adolescente
+  </div>
+  <div class="card-body">
+    <!-- Inicio do formulário -->
+
+    <form class="teenagers" method="POST">
+      {% csrf_token %}
+
+
+
+      <div class="form-group">
+        <input type="text" class="form-control " name="name" required id="id_name" placeholder="Nome do adolescente">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control " name="name_mother" required id="id_name_mother"
+          placeholder="Nome do mãe">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control " name="name_father" id="id_name_father"
+          placeholder="Nome do pai">
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-2 mb-3 mb-sm-0">
+          <input placeholder="Data de Nascimento" class="form-control" type="text" required onfocus="(this.type='date')"
+            name="date_birth" id="id_date_birth">
+        </div>
+
+        <div class="col-sm-2">
+          <select class="form-control" name="type_sex" id="id_type_sex">
+            <option selected>Sexo</option>
+            <option value="1">Masculino</option>
+            <option value="2">Feminino</option>
+            <option value="3">Outros</option>
+          </select>
+        </div>
+
+      <div class="form-group col-sm-8">
+        <input type="text" class="form-control " name="address" id="id_address" placeholder="Endereço Completo">
+      </div>
+
+      </div>
+
+      <div class="form-group">
+        <textarea rows="3"  class="form-control " name="notes"  id="id_notes" placeholder="Observacao"></textarea>
+      </div>
+
+      <hr>
+      <!-- buttons -->
+      <div class="form-group row">
+        <div class="col-sm">
+          <a href="{% url 'teenagers' %}" class="btn btn-secondary btn-user btn-block">
+            Voltar
+          </a>
+        </div>
+        <div class="col-sm">
+          <button type="reset" class="btn btn-danger btn-user btn-block">
+            Limpar
+          </button>
+        </div>
+        <div class="col-sm">
+          <button type="submit" class="btn btn-primary btn-user btn-block">
+            Cadastrar Adolescente
+          </button>
+        </div>
+      </div>
+      <!-- End buttons -->
+    </form>
+
+  </div>
+</div>
+
+</div>
+
+{% endblock %}
