@@ -13,7 +13,7 @@ psycopg2==2.7.5
 pylint==2.4.3
 python-dotenv==0.10.3
 pytz==2019.3
-PyYAML==5.1
+PyYAML==5.4
 requests==2.21.0
 six==1.13.0
 sqlparse==0.3.0
